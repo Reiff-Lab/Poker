@@ -1,4 +1,6 @@
 """Console input/output helpers."""
+# Luisa
+
 
 from __future__ import annotations
 
@@ -8,10 +10,12 @@ from player import Player
 
 class ConsoleUI: 
     def show_table(self, community_cards: list[Card], pot: int) -> None:
-        # TODO: Task 1 - display the current state of the table, including the community cards and the pot size.
-        # If there are no community cards, indicate that the board is empty.
-        pass 
-
+        board = self.format_cards(community_cards)
+        if board == "":
+            board = "empty"
+        print(f"Board: {board}")
+        print(f"Pot: {pot}")
+        
     def show_player(self, player: Player) -> None:
         # TODO: Task 2 - display the player's name, hole cards, and chip count in a clear format.
         pass

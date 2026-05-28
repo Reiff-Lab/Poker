@@ -1,5 +1,4 @@
 """Player model for the poker table."""
-# Luisa
 # Common Mistakes were checked
 # Optional Extensions were not worked on yet :)
 

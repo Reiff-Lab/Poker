@@ -1,6 +1,4 @@
 """Console input/output helpers."""
-# Luisa
-
 
 from __future__ import annotations
 

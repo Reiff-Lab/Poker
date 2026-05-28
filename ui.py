@@ -12,7 +12,7 @@ class ConsoleUI:
     def show_table(self, community_cards: list[Card], pot: int) -> None:
         board = self.format_cards(community_cards)
         if board == "":
-            board = "empty"
+            board = "(empty)"
         print(f"Board: {board}")
         print(f"Pot: {pot}")
 
@@ -43,14 +43,21 @@ class ConsoleUI:
             return self.ask_action(player, call_amount)
 
     def ask_raise_amount(self, minimum: int, maximum: int) -> int:
-        # TODO: Task 4 - prompt the player to enter a raise amount, 
-        # ensuring that it is a valid integer within the specified range.
-        pass
+        try:
+            amount = int(input(f"Enter raise amount between {minimum} and {maximum}: "))
+        except ValueError:
+            print("Please enter a valid number.")
+            return self.ask_raise_amount(minimum, maximum)
+
+        if amount < minimum or amount > maximum:
+            print("Invalid raise amount.")
+            return self.ask_raise_amount(minimum, maximum)
+        
+        return amount
 
     def show_message(self, message: str) -> None:
-        # TODO: Task 5 - display a message to the player
-        pass
+        print(message)
     
     def format_cards(self, cards: list[Card]) -> str:
-        # TODO: Task 6 - convert a list of Card objects into a string representation
-        pass
+        return " ".join(str(card) for card in cards)
+    

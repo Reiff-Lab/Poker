@@ -129,6 +129,7 @@ class TexasHoldemGame:
                 if player.chips < call_amount:
                     player.folded = True
                     self.ui.show_message(f"{player.name} cannot call and folds")
+                    continue
 
                 if max_raise < min_raise: # Player does not have enough chips to call AND also raise, thus we treat it as a call
                     paid = player.bet(call_amount)

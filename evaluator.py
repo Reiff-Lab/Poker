@@ -73,7 +73,7 @@ class HandEvaluator:
             return HandRank(HandCategory.FULL_HOUSE, (groups[0][1], groups[1][1]))
 
         if is_flush:
-            return HandRank(HandCategory.Flush, tuple(ranks))
+            return HandRank(HandCategory.FLUSH, tuple(ranks))
 
         if straight_high:
             return HandRank(HandCategory.STRAIGHT, (straight_high,))

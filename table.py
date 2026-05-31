@@ -1,5 +1,4 @@
 """Shared table state for a Hold'em hand."""
-"Rawya"
 
 from __future__ import annotations
 
@@ -7,7 +6,7 @@ from dataclasses import dataclass, field
 
 from cards import Card
 
-
+@dataclass
 class Table:
     community_cards: list[Card] = field(default_factory=list)
     pot: int = 0

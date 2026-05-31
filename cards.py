@@ -1,5 +1,4 @@
 """Card and deck primitives for Texas Hold'em."""
-"Rawya"
 
 from __future__ import annotations
 

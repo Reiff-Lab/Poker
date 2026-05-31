@@ -1,5 +1,4 @@
 """Five-card hand evaluator used to rank Texas Hold'em showdowns."""
-"Rawya"
 
 from __future__ import annotations
 

@@ -110,73 +110,73 @@ evaluator = HandEvaluator()
 def c(rank, suit):
     return Card(rank, suit)
 
-# Straight Flush Test
-cards = [
-    c(Rank.TEN, Suit.HEARTS),
-    c(Rank.JACK, Suit.HEARTS),
-    c(Rank.QUEEN, Suit.HEARTS),
-    c(Rank.KING, Suit.HEARTS),
-    c(Rank.ACE, Suit.HEARTS),
-]
-print(evaluator.best_rank(cards).label)
+# # Straight Flush Test
+# cards = [
+#     c(Rank.TEN, Suit.HEARTS),
+#     c(Rank.JACK, Suit.HEARTS),
+#     c(Rank.QUEEN, Suit.HEARTS),
+#     c(Rank.KING, Suit.HEARTS),
+#     c(Rank.ACE, Suit.HEARTS),
+# ]
+# print(evaluator.best_rank(cards).label)
 
-# Four of a Kind Test
-cards = [
-    c(Rank.NINE, Suit.CLUBS),
-    c(Rank.NINE, Suit.DIAMONDS),
-    c(Rank.NINE, Suit.CLUBS),
-    c(Rank.NINE, Suit.SPADES),
-    c(Rank.TWO, Suit.HEARTS),
-]
-print(evaluator.best_rank(cards).label)
+# # Four of a Kind Test
+# cards = [
+#     c(Rank.NINE, Suit.CLUBS),
+#     c(Rank.NINE, Suit.DIAMONDS),
+#     c(Rank.NINE, Suit.CLUBS),
+#     c(Rank.NINE, Suit.SPADES),
+#     c(Rank.TWO, Suit.HEARTS),
+# ]
+# print(evaluator.best_rank(cards).label)
 
-# Full House Test
-cards = [
-    c(Rank.TEN, Suit.CLUBS),
-    c(Rank.TEN, Suit.HEARTS),
-    c(Rank.TEN, Suit.SPADES),
-    c(Rank.FIVE, Suit.CLUBS),
-    c(Rank.FIVE, Suit.HEARTS),
-]
-print(evaluator.best_rank(cards).label)
+# # Full House Test
+# cards = [
+#     c(Rank.TEN, Suit.CLUBS),
+#     c(Rank.TEN, Suit.HEARTS),
+#     c(Rank.TEN, Suit.SPADES),
+#     c(Rank.FIVE, Suit.CLUBS),
+#     c(Rank.FIVE, Suit.HEARTS),
+# ]
+# print(evaluator.best_rank(cards).label)
 
-# Flush Test
-cards = [
-    c(Rank.TWO, Suit.SPADES),
-    c(Rank.FIVE, Suit.SPADES),
-    c(Rank.SEVEN, Suit.SPADES),
-    c(Rank.NINE, Suit.SPADES),
-    c(Rank.JACK, Suit.SPADES),
-]
-print(evaluator.best_rank(cards).label)
+# # Flush Test
+# cards = [
+#     c(Rank.TWO, Suit.SPADES),
+#     c(Rank.FIVE, Suit.SPADES),
+#     c(Rank.SEVEN, Suit.SPADES),
+#     c(Rank.NINE, Suit.SPADES),
+#     c(Rank.JACK, Suit.SPADES),
+# ]
+# print(evaluator.best_rank(cards).label)
 
-# Straight Test
-cards = [
-    c(Rank.SIX, Suit.CLUBS),
-    c(Rank.SEVEN, Suit.HEARTS),
-    c(Rank.EIGHT, Suit.DIAMONDS),
-    c(Rank.NINE, Suit.SPADES),
-    c(Rank.TEN, Suit.CLUBS),
-]
-print(evaluator.best_rank(cards).label)
+# # Straight Test
+# cards = [
+#     c(Rank.SIX, Suit.CLUBS),
+#     c(Rank.SEVEN, Suit.HEARTS),
+#     c(Rank.EIGHT, Suit.DIAMONDS),
+#     c(Rank.NINE, Suit.SPADES),
+#     c(Rank.TEN, Suit.CLUBS),
+# ]
+# print(evaluator.best_rank(cards).label)
 
-# One Pair Test
-cards = [
-    c(Rank.ACE, Suit.HEARTS),
-    c(Rank.ACE, Suit.CLUBS),
-    c(Rank.THREE, Suit.SPADES),
-    c(Rank.SEVEN, Suit.DIAMONDS),
-    c(Rank.NINE, Suit.HEARTS),
-]
-print(evaluator.best_rank(cards).label)
+# # One Pair Test
+# cards = [
+#     c(Rank.ACE, Suit.HEARTS),
+#     c(Rank.ACE, Suit.CLUBS),
+#     c(Rank.THREE, Suit.SPADES),
+#     c(Rank.SEVEN, Suit.DIAMONDS),
+#     c(Rank.NINE, Suit.HEARTS),
+# ]
+# print(evaluator.best_rank(cards).label)
 
-# High Card Test
-cards = [
-    c(Rank.TWO, Suit.HEARTS),
-    c(Rank.FIVE, Suit.CLUBS),
-    c(Rank.NINE, Suit.DIAMONDS),
-    c(Rank.JACK, Suit.SPADES),
-    c(Rank.ACE, Suit.HEARTS),
-]
-print(evaluator.best_rank(cards).label)
+# # High Card Test
+# cards = [
+#     c(Rank.TWO, Suit.HEARTS),
+#     c(Rank.FIVE, Suit.CLUBS),
+#     c(Rank.NINE, Suit.DIAMONDS),
+#     c(Rank.JACK, Suit.SPADES),
+#     c(Rank.ACE, Suit.HEARTS),
+# ]
+# print(evaluator.best_rank(cards).label)
 

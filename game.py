@@ -90,12 +90,12 @@ class TexasHoldemGame:
         
         highest_bet = max(player.current_bet for player in self.players)
 
-        players_to_act = [player for player in self.players if player.active] # list of players that have not folded and thus need to act
+        players_to_act = [player for player in self.players if player.can_act] # list of players that have not folded and thus need to act
 
         while players_to_act and not self._only_one_player_left(): # loop stop if everyone has acted or everyone but one has folded
             player = players_to_act.pop(0)
 
-            if not player.active:   # safety guard (redundant in theory)
+            if not player.can_act:   # safety guard (redundant in theory)
                 continue
 
             call_amount = max(0, (highest_bet - player.current_bet))
@@ -155,7 +155,7 @@ class TexasHoldemGame:
                     players_to_act = [
                         other_player
                         for other_player in self.players
-                        if other_player.active and other_player != player 
+                        if other_player.can_act and other_player != player 
                     ]
 
         for player in self.players: # resetting the current bet at the end of a betting round

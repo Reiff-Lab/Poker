@@ -35,8 +35,13 @@ class Player:
         return wager 
     
     @property
-    def active(self) -> bool:
-        return (not self.folded) and (self.chips > 0) # only return True if the Player has not Folded and if they still have chips
+    def active(self) -> bool: #is this player still in current hand? 
+        return (not self.folded)
+    
+    @property
+    def can_act(self) -> bool: # Should this Player still be asked to c,r,f?
+        return (not self.folded) and (self.chips > 0) 
+    
         
 
 

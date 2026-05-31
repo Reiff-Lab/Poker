@@ -193,9 +193,12 @@ class TexasHoldemGame:
 
         winner_names = ", ".join(winner.name for winner in winners)
 
-        self.ui.show_message(
-            f"{winner_names} win {winnings} chips each with {best_rank.label}."
-        )
+        if len(winners) == 1:
+            self.ui.show_message(
+                f"Winner: {winner_names} won {winnings} chips with {best_rank.label}.")
+        else:
+            self.ui.show_message(
+                f"Winners: {winner_names} won {winnings} chips each with {best_rank.label}.")
 
         self.table.pot = 0
 

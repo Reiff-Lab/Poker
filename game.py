@@ -65,11 +65,14 @@ class TexasHoldemGame:
             f"{small_blind_player.name} posts {small_amount}; {big_blind_player.name} posts {big_amount}"
             )
 
-    def _show_human_cards(self) -> None:
+    def _show_human_cards(self) -> None: # this I changed to allow multiple human players to see their cards one after the other
         for player in self.players:
             if player.is_human:
+                input(f"{player.name}, press Enter to see your cards.")
                 cards = self.ui.format_cards(player.hole_cards)
                 self.ui.show_message(f"{player.name}: {cards}")
+                input(f"{player.name}, press Enter when you are done.")
+                print("\n" * 15)
 
     def _deal_community(self, deck: Deck, count: int, street: str) -> None:
         if self._only_one_player_left():

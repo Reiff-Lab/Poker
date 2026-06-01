@@ -101,8 +101,15 @@ class TexasHoldemGame:
             call_amount = max(0, (highest_bet - player.current_bet))
 
             if player.is_human:
-                self.ui.show_player(player)
+                input(f"\n{player.name}, press Enter and proceed with your turn.")
+                self.ui.show_table(self.table.community_cards, self.table.pot)
+
+                cards = self.ui.format_cards(player.hole_cards)
+                self.ui.show_message(f"Your cards: {cards}")
+                self.ui.show_message(f"Your chips: {player.chips}")
+
                 action = self.ui.ask_action(player, call_amount)
+                print("\n * 15")
             else:
                 action = self._bot_action(player, call_amount)
                 self.ui.show_message(f"{player.name} chooses to {action}")

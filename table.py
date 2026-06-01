@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 
 from cards import Card
 
-
+@dataclass
 class Table:
     # Represents the shared state of the table during a hand, including community cards(visible to all players) and total pot value.
     community_cards: list[Card] = field(default_factory=list)

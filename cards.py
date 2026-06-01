@@ -1,6 +1,5 @@
 """Card and deck primitives for Texas Hold'em."""
 
-
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -103,10 +102,10 @@ class Deck:
         shuffle(self._cards)
 
 
-    deck = Deck()
+# deck = Deck()
 
-    hand = deck.draw(2)
+# hand = deck.draw(2)
     
-    print(hand)
-    print(len(deck._cards))    #expected: 50
+# print(hand)
+# print(len(deck._cards))    #expected: 50
 

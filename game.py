@@ -65,11 +65,14 @@ class TexasHoldemGame:
             f"{small_blind_player.name} posts {small_amount}; {big_blind_player.name} posts {big_amount}"
             )
 
-    def _show_human_cards(self) -> None:
+    def _show_human_cards(self) -> None: # this I changed to allow multiple human players to see their cards one after the other
         for player in self.players:
             if player.is_human:
+                input(f"{player.name}, press Enter to see your cards.")
                 cards = self.ui.format_cards(player.hole_cards)
                 self.ui.show_message(f"{player.name}: {cards}")
+                input(f"{player.name}, press Enter when you are done.")
+                print("\n" * 15)
 
     def _deal_community(self, deck: Deck, count: int, street: str) -> None:
         if self._only_one_player_left():
@@ -87,12 +90,12 @@ class TexasHoldemGame:
         
         highest_bet = max(player.current_bet for player in self.players)
 
-        players_to_act = [player for player in self.players if player.active] # list of players that have not folded and thus need to act
+        players_to_act = [player for player in self.players if player.can_act] # list of players that have not folded and thus need to act
 
         while players_to_act and not self._only_one_player_left(): # loop stop if everyone has acted or everyone but one has folded
             player = players_to_act.pop(0)
 
-            if not player.active:   # safety guard (redundant in theory)
+            if not player.can_act:   # safety guard (redundant in theory)
                 continue
 
             call_amount = max(0, (highest_bet - player.current_bet))
@@ -126,6 +129,7 @@ class TexasHoldemGame:
                 if player.chips < call_amount:
                     player.folded = True
                     self.ui.show_message(f"{player.name} cannot call and folds")
+                    continue
 
                 if max_raise < min_raise: # Player does not have enough chips to call AND also raise, thus we treat it as a call
                     paid = player.bet(call_amount)
@@ -152,7 +156,7 @@ class TexasHoldemGame:
                     players_to_act = [
                         other_player
                         for other_player in self.players
-                        if other_player.active and other_player != player 
+                        if other_player.can_act and other_player != player 
                     ]
 
         for player in self.players: # resetting the current bet at the end of a betting round
@@ -193,9 +197,12 @@ class TexasHoldemGame:
 
         winner_names = ", ".join(winner.name for winner in winners)
 
-        self.ui.show_message(
-            f"{winner_names} win {winnings} chips each with {best_rank.label}."
-        )
+        if len(winners) == 1:
+            self.ui.show_message(
+                f"Winner: {winner_names} won {winnings} chips with {best_rank.label}.")
+        else:
+            self.ui.show_message(
+                f"Winners: {winner_names} won {winnings} chips each with {best_rank.label}.")
 
         self.table.pot = 0
 

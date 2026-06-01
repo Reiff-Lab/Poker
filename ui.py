@@ -32,7 +32,10 @@ class ConsoleUI:
             
             action = input(prompt).strip().lower()
 
-            if action in {"c", "call", "check"}:
+            if call_amount == 0 and action in {"c", "call", "check"}:
+                return "call"
+
+            if call_amount > 0 and action in {"c", "call"}:
                 return "call"
             
             if action in {"r", "raise"}:

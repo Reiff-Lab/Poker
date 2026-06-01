@@ -68,7 +68,7 @@ class TexasHoldemGame:
     def _show_human_cards(self) -> None: # this I changed to allow multiple human players to see their cards one after the other
         for player in self.players:
             if player.is_human:
-                input(f"{player.name}, press Enter to see your cards.")
+                input(f"\n{player.name}, press Enter to see your cards and choose your action.")
                 cards = self.ui.format_cards(player.hole_cards)
                 self.ui.show_message(f"{player.name}: {cards}")
                 input(f"{player.name}, press Enter when you are done.")

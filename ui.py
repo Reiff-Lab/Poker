@@ -1,5 +1,5 @@
 """Console input/output helpers.""" 
-# Common Mistakes were checked
+
 
 from __future__ import annotations
 

@@ -21,7 +21,7 @@ class Table:
         # No negative values allowed for pot contributions. Adds the specified amount to the total pot.
         if amount < 0:
             raise ValueError("Amount cannot be negative.")
-        self.pot +=amount
+        self.pot += amount
 
 
 

@@ -1,6 +1,5 @@
 """Player model for the poker table."""
-# Common Mistakes were checked
-# Optional Extensions were not worked on yet :)
+
 
 from __future__ import annotations
 

@@ -1,5 +1,5 @@
 """Main Texas Hold'em game loop."""
-# Common Mistakes checked
+
 
 from __future__ import annotations
 

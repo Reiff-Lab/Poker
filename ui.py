@@ -69,3 +69,12 @@ class ConsoleUI:
     def format_cards(self, cards: list[Card]) -> str:
         return " ".join(str(card) for card in cards)
     
+    def show_scoreboard(self, players: list[Player]) -> None:
+        print("\n--- Scoreboard ---")
+        for player in players:
+            earnings = player.chips - player.starting_chips
+            print(
+                f"{player.name}: "
+                f"Wins: {player.wins}, "
+                f"Chips: {player.chips}, "
+                f"Total earnings: {earnings}")

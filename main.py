@@ -53,37 +53,45 @@ def create_players() -> list[Player]:
 def players_with_chips(players: list[Player]) -> list[Player]:
     return [player for player in players if player.chips > 0]
 
+def reset_scoreboard(players: list[Player]) -> None:
+    for player in players:
+        player.wins = 0
+        player.starting_chips = player.chips
+
 def main() -> None:
     players = create_players()
     hand_number = 1
 
-    while len(players_with_chips(players)) > 1:
-        players = players_with_chips(players)
-        print(f"\n========== Hand {hand_number} ==========")
+    try:
+        while len(players_with_chips(players)) > 1:
+            players = players_with_chips(players)
+            print(f"\n========== Hand {hand_number} ==========")
         
-        game = TexasHoldemGame(players)
+            game = TexasHoldemGame(players)
         
-        game.play_hand()
+            game.play_hand()
 
-        print("\nChip counts:")
-        for player in players:
-            print(f"{player.name}: {player.chips}")
+            print("\nChip counts:")
+            for player in players:
+                print(f"{player.name}: {player.chips}")
         
-        players = players_with_chips(players)
+            players = players_with_chips(players)
 
-        if len(players) > 1:
-            answer = input("\nPress Enter to play the next ahnd, or type q to quit: ").strip().lower()
+            if len(players) > 1:
+                answer = input("\nPress Enter to play the next ahnd, or type q to quit: ").strip().lower()
 
-            if answer == "q":
-                print("\nGame stopped by player.")
-                return
+                if answer == "q":
+                    print("\nGame stopped by player.")
+                    return
             
-            players.append(players.pop(0)) # simplified version of dealer button rotation
+                players.append(players.pop(0)) # simplified version of dealer button rotation
 
-        hand_number += 1
+            hand_number += 1
     
-    winner = players_with_chips(players)[0]
-    print(f"\n Game over! {winner.name} wins the game! Congratulations!")
+        winner = players_with_chips(players)[0]
+        print(f"\nGame over! {winner.name} wins the game!")
+    finally:
+        reset_scoreboard(players)
 
 
 if __name__ == "__main__":

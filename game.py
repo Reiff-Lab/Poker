@@ -51,6 +51,8 @@ class TexasHoldemGame:
 
         self._showdown()
 
+        self.ui.show_scoreboard(self.players)
+
     def _post_blinds(self) -> None:
         small_blind_player = self.players[0]  
         big_blind_player = self.players[1]
@@ -195,6 +197,7 @@ class TexasHoldemGame:
         
         if len(active_players) == 1:
             active_players[0].chips += self.table.pot
+            active_players[0].wins += 1
             self.ui.show_message(f"{active_players[0].name} wins {self.table.pot} chips.")
             self.table.pot = 0
             return
@@ -216,6 +219,7 @@ class TexasHoldemGame:
         
         for winner in winners:
             winner.chips += winnings
+            winner.wins += 1
 
         winner_names = ", ".join(winner.name for winner in winners)
 

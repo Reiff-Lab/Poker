@@ -72,8 +72,13 @@ def main() -> None:
         players = players_with_chips(players)
 
         if len(players) > 1:
-            players.append(players.pop(0))
-            input("\n Press Enter to play the next hand...")
+            answer = input("\nPress Enter to play the next ahnd, or type q to quit: ").strip().lower()
+
+            if answer == "q":
+                print("\nGame stopped by player.")
+                return
+            
+            players.append(players.pop(0)) # simplified version of dealer button rotation
 
         hand_number += 1
     
@@ -83,4 +88,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

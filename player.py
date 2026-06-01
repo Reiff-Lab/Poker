@@ -31,7 +31,10 @@ class Player:
         wager = min(self.chips, amount) #calculate the wager that is possible
         self.chips -= wager #decrease chips
         self.current_bet += wager #increase the current bet
-        return wager 
+        return wager
+    
+    def all_in(self) -> int:
+        return self.bet(self.chips)
     
     @property
     def active(self) -> bool: #is this player still in current hand? 

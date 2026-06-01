@@ -26,9 +26,9 @@ class ConsoleUI:
     def ask_action(self, player: Player, call_amount: int) -> str: 
         while True:
             if call_amount == 0:
-                prompt = f"{player.name}, please choose an action: check, raise, or fold: "
+                prompt = f"{player.name}, please choose an action: check, raise, all-in, or fold: "
             else:
-                prompt = f"{player.name}, please choose an action: call {call_amount}, raise, or fold: "
+                prompt = f"{player.name}, please choose an action: call {call_amount}, raise, all-in, or fold: "
             
             action = input(prompt).strip().lower()
 
@@ -40,6 +40,9 @@ class ConsoleUI:
             
             if action in {"r", "raise"}:
                 return "raise"
+            
+            if action in {"a", "all-in","all in", "allin"}:
+                return "all_in"
             
             if action in {"f", "fold"}:
                 return "fold"

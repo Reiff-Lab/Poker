@@ -118,8 +118,23 @@ class TexasHoldemGame:
 
                 if call_amount == 0:
                     self.ui.show_message(f"{player.name} checks.")
+                elif paid < call_amount:
+                    self.ui.show_message(f"{player.name} cannot fully call and goes all-in with {paid}.")
                 else:
                     self.ui.show_message(f"{player.name} calls {paid}.")
+            
+            elif action == "all_in":
+                paid = player.all_in()
+                self.table.add_to_pot(paid)
+
+                if player.current_bet > highest_bet:
+                    highest_bet = player.current_bet
+                    self.ui.show_message(f"{player.name} goes all-in with {paid} chips.")
+                    players_to_act= [
+                        other_player 
+                        for other_player in self.players if other_player.can_act and other_player != player]
+                else:
+                    self.ui.show_message(f"{player.name} goes all-in with {paid} chips.")            
 
             elif action == "raise": 
                 # Raise must be more than the previous bet

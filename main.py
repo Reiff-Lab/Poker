@@ -2,6 +2,7 @@
 
 from game import TexasHoldemGame
 from player import Player
+from simulation import run_simulation, print_results
 
 MINIMUM_PLAYERS = 2
 MAXIMUM_PLAYERS = 8

@@ -111,7 +111,7 @@ class TexasHoldemGame:
                 self.ui.show_message(f"Your chips: {player.chips}")
 
                 action = self.ui.ask_action(player, call_amount)
-                print("\n * 15")
+                print("\n" * 15)
             else:
                 action = self._bot_action(player, call_amount)
                 self.ui.show_message(f"{player.name} chooses to {action}")

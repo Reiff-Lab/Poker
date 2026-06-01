@@ -78,7 +78,7 @@ def main() -> None:
             players = players_with_chips(players)
 
             if len(players) > 1:
-                answer = input("\nPress Enter to play the next ahnd, or type q to quit: ").strip().lower()
+                answer = input("\nPress Enter to play the next hand, or type q to quit: ").strip().lower()
 
                 if answer == "q":
                     print("\nGame stopped by player.")

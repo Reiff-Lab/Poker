@@ -65,7 +65,7 @@ def main() -> None:
         
         game.play_hand()
 
-        print("\n Chip counts:")
+        print("\nChip counts:")
         for player in players:
             print(f"{player.name}: {player.chips}")
         

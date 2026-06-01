@@ -25,7 +25,7 @@ def ask_numbers_players(prompt: str, minimum_players: int, maximum_players: int)
         return number
 
 def create_players() -> list[Player]:
-    total_players = ask_numbers_players("How many players should this game consist of in total? ", MINIMUM_PLAYERS, MAXIMUM_PLAYERS)
+    total_players = ask_numbers_players("\nHow many players should this game consist of in total? ", MINIMUM_PLAYERS, MAXIMUM_PLAYERS)
     human_players = ask_numbers_players("How many human players are playing this game? ", 1, total_players)
 
     players = []

@@ -118,7 +118,7 @@ class TexasHoldemGame:
 
                 if call_amount == 0:
                     self.ui.show_message(f"{player.name} checks.")
-                elif paid > call_amount:
+                elif paid < call_amount:
                     self.ui.show_message(f"{player.name} cannot fully call and goes all-in with {paid}.")
                 else:
                     self.ui.show_message(f"{player.name} calls {paid}.")

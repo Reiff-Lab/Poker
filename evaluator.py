@@ -135,6 +135,8 @@ evaluator = HandEvaluator()
 def c(rank, suit):
     return Card(rank, suit)
 
+
+# EVALUATOR TESTS
 # # Straight Flush Test
 # cards = [
 #     c(Rank.TEN, Suit.HEARTS),

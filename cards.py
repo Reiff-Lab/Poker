@@ -142,12 +142,4 @@ def show_cards(cards: list[Card]) -> None:
         for card in card_lines:
             print(card[i], end="  ")
         print()
-    
-
-# deck = Deck()
-
-# hand = deck.draw(2)
-    
-# print(hand)
-# print(len(deck._cards))    #expected: 50
 

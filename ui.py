@@ -21,15 +21,16 @@ class ConsoleUI:
         print(f"Chips: {player.chips}")
     
     def ask_action(self, player: Player, call_amount: int) -> str: 
+        # Asks Player which action they want to take and returns it.
         while True:
-            if call_amount == 0:
+            if call_amount == 0: # to differentiate between check and call
                 prompt = f"{player.name}, please choose an action: check, raise, all-in, or fold: "
             else:
                 prompt = f"{player.name}, please choose an action: call {call_amount}, raise, all-in, or fold: "
             
             action = input(prompt).strip().lower()
 
-            if call_amount == 0 and action in {"c", "call", "check"}:
+            if call_amount == 0 and action in {"c", "call", "check"}: # accepts check and call
                 return "call"
 
             if call_amount > 0 and action in {"c", "call"}:
@@ -44,9 +45,10 @@ class ConsoleUI:
             if action in {"f", "fold"}:
                 return "fold"
             
-            print("Invalid action. Please try again.")
+            print("Invalid action. Please try again.") # If the input was not valid, the loop will continue and the Player will be asked again. 
 
     def ask_raise_amount(self, minimum: int, maximum: int) -> int:
+        # Ask the Player how many chips they want to raise and returns the number/amount.
         while True:
             try:
                 amount = int(input(f"Enter raise amount between {minimum} and {maximum}: "))
@@ -54,13 +56,13 @@ class ConsoleUI:
                 print("Please enter a valid number.")
                 continue
 
-            if amount < minimum or amount > maximum:
+            if amount < minimum or amount > maximum: # Checking that number is not outside of allowed range
                 print(f"Invalid raise amount. Please enter a raise amount between {minimum} and {maximum}.")
                 continue
             
-            return amount
+            return amount 
 
-    def show_message(self, message: str) -> None:
+    def show_message(self, message: str) -> None: # print()
         print(message)
     
     def format_cards(self, cards: list[Card]) -> str:

@@ -118,13 +118,13 @@ def show_card(card: Card) -> list[str]:
         rank_right = rank
 
     # Build the ASCII card
-    lines = [    
+    lines = [
         "┌───────┐",
-        f"│ {rank_left}    │",
+        f"│ {rank_left:<5} │",
         "│       │",
         f"│   {suit}   │",
         "│       │",
-        f"│    {rank_right}│",
+        f"│ {rank_right:>5} │",
         "└───────┘"
     ]
 
@@ -133,7 +133,7 @@ def show_card(card: Card) -> list[str]:
 def show_cards(cards: list[Card]) -> None:
     card_lines = [show_card(card) for card in cards]
 
-    for i in range(5):
+    for i in range(7):
         for card in card_lines:
             print(card[i], end="  ")
         print()

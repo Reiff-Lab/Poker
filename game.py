@@ -156,7 +156,6 @@ class TexasHoldemGame:
                 self.ui.show_message(f"Your chips: {player.chips}")
 
                 action = self.ui.ask_action(player, call_amount) # Ask Human to choose call/check, raise, fold or all-in
-                self._hide_private_info()  # Hide Players cards from next Player
             else:
                 # Bots will choose an action automatically.
                 action = self._bot_action(player, call_amount)
@@ -166,12 +165,19 @@ class TexasHoldemGame:
             if action == "fold":
                 # Folding removes the player from the current round. 
                 player.folded = True
+
+                if player.is_human:
+                    self._hide_private_info() # Hide private info
+
                 self.ui.show_message(f"{player.name} folds.")
 
             elif action == "call":
                 # Player pays chips to match highest bet
                 paid = player.bet(call_amount)
                 self.table.add_to_pot(paid)
+
+                if player.is_human:
+                    self._hide_private_info()
 
                 if call_amount == 0: # special case: distinguish between call and check
                     self.ui.show_message(f"{player.name} checks.")  
@@ -183,6 +189,9 @@ class TexasHoldemGame:
             elif action == "all_in":
                 paid = player.all_in()
                 self.table.add_to_pot(paid)
+
+                if player.is_human:
+                    self._hide_private_info() # hide private info
 
                 if player.current_bet > highest_bet:
                     # If the all-in raises the highest bet, the other players must act again
@@ -230,6 +239,9 @@ class TexasHoldemGame:
 
                     # The raisers current bet becomes the new highest bet
                     highest_bet = player.current_bet
+
+                    if player.is_human:
+                        self._hide_private_info() # hide private info
 
                     self.ui.show_message(f"{player.name} raises by {raise_amount}.")
                     

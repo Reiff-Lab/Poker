@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+import random
+
 from cards import Deck
 from evaluator import HandEvaluator
 from player import Player
@@ -165,7 +167,10 @@ class TexasHoldemGame:
 
 
                 else:
-                    raise_amount = self.ui.ask_raise_amount(min_raise, max_raise)
+                    if player.is_human:
+                        raise_amount = self.ui.ask_raise_amount(min_raise, max_raise)
+                    else:
+                        raise_amount = self._bot_raise_amount(player, call_amount, min_raise, max_raise)
 
                     total_payment = call_amount + raise_amount
 
@@ -187,10 +192,82 @@ class TexasHoldemGame:
             player.current_bet = 0
 
 
+
     def _bot_action(self, player: Player, call_amount: int) -> str:
-        if call_amount > player.chips / 2:
+        strength = self._bot_hand_strength(player)
+
+        if player.chips <= 0:
+            return "call"
+        
+        call_ratio = call_amount / player.chips
+
+        if call_amount >= player.chips:
+            if strength >= 6 or random.random() < 0.10:
+                return "all_in"
             return "fold"
+        
+        if call_amount == 0:
+            if strength >= 5 and player.chips > self.big_blind and random.random() < 0.50:
+                return "raise"
+            if strength >= 3 and player.chips > self.big_blind and random.random() < 0.15:
+                return "raise"
+            if player.chips > self.big_blind and random.random() < 0.05:
+                return "raise"
+            return "call"
+        
+        if call_ratio > 0.5 and strength < 6:
+            return "fold"
+        if call_ratio > 0.25 and strength < 4 and random.random() < 0.75:
+            return "fold"
+        if strength >= 6 and player.chips > call_amount + self.big_blind and random.random() < 0.45:
+            return "raise"
+        if strength >= 4 and player.chips > call_amount + self.big_blind and random.random() < 0.20:
+            return "raise"
+        if player.chips > call_amount + self.big_blind and random.random() > 0.05:
+            return "raise"
         return "call"
+    
+    def _bot_hand_strength(self, player: Player) -> int:
+        cards = player.hole_cards + self.table.community_cards
+
+        if len(cards) >= 5:
+            rank = self.evaluator.best_rank(cards)
+            return int(rank.category) * 2
+        return self._bot_preflop_strength(player)
+
+    def _bot_preflop_strength(self, player: Player) -> int:
+        if len(player.hole_cards) < 2:
+            return 0
+        
+        first_card = player.hole_cards[0]
+        second_card = player.hole_cards[1]
+        ranks = sorted([first_card.rank, second_card.rank], reverse=True)
+
+        strength = 0
+
+        if ranks[0] == ranks[1]:
+            strength += 5
+            if ranks[0] >= 10:
+                strength += 2
+
+        if ranks[0] >= 14:
+            strength += 2
+        elif ranks[0] >= 11:
+            strength += 1
+
+        if ranks[1] > 10:
+            strength += 1
+        
+        if first_card.suit == second_card.suit:
+            strength += 1
+            
+        return strength
+    
+    def _bot_raise_amount(self, player: Player, call_amount: int, minimum: int, maximum: int) -> int:
+        safe_maximum = min(maximum, self.big_blind * 3)
+        safe_maximum = max(minimum, safe_maximum)
+        return random.randint(minimum, safe_maximum)
+    
 
     def _showdown(self) -> None:
         active_players = [player for player in self.players if not player.folded]

@@ -312,7 +312,7 @@ class TexasHoldemGame:
         else:
             if odd_chips == 0:
                 self.ui.show_message(
-                    f"Winners: {winner_names} won {winnings} chips each with {best_rank.label}")
+                    f"Winners: {winner_names} won {winnings} chips each with {best_rank.label}.")
             else:
                 self.ui.show_message(
                     f"Winners: {winner_names} split the pot with {best_rank.label}. "

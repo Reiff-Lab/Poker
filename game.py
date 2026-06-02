@@ -149,7 +149,7 @@ class TexasHoldemGame:
             if player.is_human:
                 # Give human Player a private moment to see their cards and choose an action.
                 input(f"\n{player.name}, press Enter and proceed with your turn.")
-                self.ui.show_table(self.table.community_cards, self.table.pot)
+                # self.ui.show_table(self.table.community_cards, self.table.pot) redundant but kept just in case
 
                 self.ui.show_message("Your cards:")
                 show_cards(player.hole_cards)

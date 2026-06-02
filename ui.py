@@ -1,11 +1,8 @@
 """Console input/output helpers.""" 
 
-
 from __future__ import annotations
-
 from cards import Card
 from player import Player
-
 
 class ConsoleUI: 
     def show_table(self, community_cards: list[Card], pot: int) -> None:

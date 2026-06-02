@@ -131,6 +131,11 @@ def show_card(card: Card) -> list[str]:
     return lines
 
 def show_cards(cards: list[Card]) -> None:
+
+    if not cards:
+        print("(empty)")
+        return
+    
     card_lines = [show_card(card) for card in cards]
 
     for i in range(7):

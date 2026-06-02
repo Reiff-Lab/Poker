@@ -150,8 +150,8 @@ class TexasHoldemGame:
                 input(f"\n{player.name}, press Enter and proceed with your turn.")
                 self.ui.show_table(self.table.community_cards, self.table.pot)
 
-                cards = self.ui.format_cards(player.hole_cards)
-                self.ui.show_message(f"Your cards: {cards}")
+                self.ui.show_message("Your cards:")
+                show_cards(player.hole_cards)
                 self.ui.show_message(f"Your chips: {player.chips}")
 
                 action = self.ui.ask_action(player, call_amount) # Ask Human to choose call/check, raise, fold or all-in

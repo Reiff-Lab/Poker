@@ -149,13 +149,23 @@ class TexasHoldemGame:
             if player.is_human:
                 # Give human Player a private moment to see their cards and choose an action.
                 input(f"\n{player.name}, press Enter and proceed with your turn.")
-                # self.ui.show_table(self.table.community_cards, self.table.pot) redundant but kept just in case
+            
+                self.ui.show_message(f"\nBetting round: {street}")
+
+                if self.table.community_cards:
+                    self.ui.show_message("Community Cards:")
+                    show_cards(self.table.community_cards)
+                else:
+                    self.ui.show_message("Community Cards: (empty)")
+                
+                self.ui.show_message(f"Pot: {self.table.pot}")
 
                 self.ui.show_message("Your cards:")
                 show_cards(player.hole_cards)
                 self.ui.show_message(f"Your chips: {player.chips}")
 
                 action = self.ui.ask_action(player, call_amount) # Ask Human to choose call/check, raise, fold or all-in
+            
             else:
                 # Bots will choose an action automatically.
                 action = self._bot_action(player, call_amount)

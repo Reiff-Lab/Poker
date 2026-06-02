@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 import random
+import os
 from cards import Deck, show_cards
 from evaluator import HandEvaluator
 from player import Player
@@ -96,7 +97,7 @@ class TexasHoldemGame:
                 show_cards(player.hole_cards)
                 
                 input(f"{player.name}, press Enter when you are done.")
-                print("\n" * 15) # empty lines to hide previous players cards
+                self._hide_private_info() # hide previous players cards
 
     def _deal_community(self, deck: Deck, count: int, street: str) -> None:
         # If only 1 Player has not folded, no more cards need to be dealt.
@@ -155,7 +156,7 @@ class TexasHoldemGame:
                 self.ui.show_message(f"Your chips: {player.chips}")
 
                 action = self.ui.ask_action(player, call_amount) # Ask Human to choose call/check, raise, fold or all-in
-                print("\n" * 15) # Hide Players cards from next Player
+                self._hide_private_info()  # Hide Players cards from next Player
             else:
                 # Bots will choose an action automatically.
                 action = self._bot_action(player, call_amount)
@@ -407,4 +408,8 @@ class TexasHoldemGame:
     def _only_one_player_left(self) -> bool:
         # active means not folded, so all-in Players with 0 chips are still active and can wini at showdown
         active_players = [player for player in self.players if player.active]
-        return len(active_players) == 1        
+        return len(active_players) == 1
+
+    def _hide_private_info(self) -> None:
+        os.system("cls" if os.name == "nt" else "clear")
+        print("Previously shown cards are hidden.")        

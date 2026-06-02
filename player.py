@@ -16,6 +16,11 @@ class Player:
     hole_cards: list[Card] = field(default_factory=list) # 
     current_bet: int = 0
     folded: bool = False
+    starting_chips: int = 0
+    wins: int = 0
+
+    def __post_init__(self) -> None:
+        self.starting_chips = self.chips
 
     def reset_for_hand(self) -> None: #reset the player's state for a new hand
         self.hole_cards.clear()

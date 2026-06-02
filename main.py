@@ -60,6 +60,7 @@ def reset_scoreboard(players: list[Player]) -> None:
 
 def main() -> None:
     players = create_players()
+    all_players = players.copy()
     hand_number = 1
 
     try:
@@ -91,7 +92,7 @@ def main() -> None:
         winner = players_with_chips(players)[0]
         print(f"\nGame over! {winner.name} wins the game!")
     finally:
-        reset_scoreboard(players)
+        reset_scoreboard(all_players)
 
 
 if __name__ == "__main__":

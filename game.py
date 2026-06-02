@@ -293,20 +293,32 @@ class TexasHoldemGame:
             if rank == best_rank]
         
         winnings = self.table.pot // len(winners)
-        
-        for winner in winners:
+        odd_chips = self.table.pot % len(winners)
+
+        for index, winner in enumerate(winners):
             winner.chips += winnings
+
+            if index == 0:
+                winner.chips += odd_chips
+            
             winner.wins += 1
+    
 
         winner_names = ", ".join(winner.name for winner in winners)
 
         if len(winners) == 1:
             self.ui.show_message(
-                f"Winner: {winner_names} won {winnings} chips with {best_rank.label}.")
+                f"Winner: {winner_names} won {self.table.pot} chips with {best_rank.label}.")
         else:
-            self.ui.show_message(
-                f"Winners: {winner_names} won {winnings} chips each with {best_rank.label}.")
-
+            if odd_chips == 0:
+                self.ui.show_message(
+                    f"Winners: {winner_names} won {winnings} chips each with {best_rank.label}")
+            else:
+                self.ui.show_message(
+                    f"Winners: {winner_names} split the pot with {best_rank.label}. "
+                    f"{winners[0].name} got {winnings + odd_chips} chips, "
+                    f"the others got {winnings} chips each.")
+            
         self.table.pot = 0
 
     def _only_one_player_left(self) -> bool:

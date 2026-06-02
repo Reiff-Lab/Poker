@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 import random
-from cards import Deck
+from cards import Deck, show_cards
 from evaluator import HandEvaluator
 from player import Player
 from table import Table
 from ui import ConsoleUI
+
 
 # Controls the main game logic of dealing cards, betting rounds, showdown and scoreboard.
 class TexasHoldemGame:
@@ -87,8 +88,13 @@ class TexasHoldemGame:
         for player in self.players:
             if player.is_human:
                 input(f"\n{player.name}, press Enter to see your cards.")
-                cards = self.ui.format_cards(player.hole_cards)
-                self.ui.show_message(f"{player.name}: {cards}")
+                
+                print ("\n" + "-" * 20)
+                print(f"\n{player.name.upper()}'s hole cards:")
+                print ("-" * 20)
+
+                show_cards(player.hole_cards)
+                
                 input(f"{player.name}, press Enter when you are done.")
                 print("\n" * 15) # empty lines to hide previous players cards
 
@@ -100,6 +106,12 @@ class TexasHoldemGame:
         # Otherwise: Drawing new community cards and adding them to table.
         self.table.community_cards.extend(deck.draw(count)) 
         self.ui.show_message(f"\n-- {street} --")   # shows what stage of the round it is.
+        print("\n" + "-" * 30)
+        print (f"{street.upper()} CARDS")
+        print ("-" * 30)
+
+        show_cards(self.table.community_cards)
+
 
     def _betting_round(self, street: str) -> None:
         # Handles a betting round
@@ -108,8 +120,15 @@ class TexasHoldemGame:
         
         # Show currrent betting round, community cards and pot.
         self.ui.show_message(f"\nBetting round: {street}") 
-        self.ui.show_table(self.table.community_cards, self.table.pot)
-        
+        print("\n" + "-" * 40)
+        print(f" {street.upper()} ROUND ")
+        print("=" * 40)
+
+        print(f"Pot: {self.table.pot}")
+
+        print("\nCommunity Cards:")
+        show_cards(self.table.community_cards)
+
         # Find the Highest bet, so what players must call. 
         highest_bet = max(player.current_bet for player in self.players)
 
@@ -335,7 +354,13 @@ class TexasHoldemGame:
             cards = player.hole_cards + self.table.community_cards
             rank = self.evaluator.best_rank(cards)
             player_ranks.append((player, rank))
+            
             self.ui.show_message(f"{player.name}: {rank.label}")
+            
+            print("\n" + "-" * 20)
+            print(f"{player.name.upper()}'s CARDS:")
+            print("-" * 20)
+            show_cards(cards)
 
         # Find best hand rank
         best_rank = max(rank for player, rank in player_ranks)

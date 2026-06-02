@@ -15,11 +15,11 @@ def ask_numbers_players(prompt: str, minimum_players: int, maximum_players: int)
         try:
             number = int(input(prompt))
         except ValueError:
-            print("Please enter a valid number.")
+            print("Please enter a valid number. ")
             continue
 
         if (number < minimum_players) or (number > maximum_players):
-            print(f"Please enter a number between {minimum_players} and {maximum_players}.")
+            print(f"Please enter a number between {minimum_players} and {maximum_players}. ")
             continue
 
         return number
@@ -71,10 +71,6 @@ def main() -> None:
             game = TexasHoldemGame(players)
         
             game.play_hand()
-
-            print("\nChip counts:")
-            for player in players:
-                print(f"{player.name}: {player.chips}")
         
             players = players_with_chips(players)
 
@@ -91,6 +87,7 @@ def main() -> None:
     
         winner = players_with_chips(players)[0]
         print(f"\nGame over! {winner.name} wins the game!")
+
     finally:
         reset_scoreboard(all_players)
 

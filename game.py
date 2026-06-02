@@ -81,8 +81,8 @@ class TexasHoldemGame:
         self.table.add_to_pot(small_amount)
         self.table.add_to_pot(big_amount)
 
-        self.ui.show_message(
-            f"{small_blind_player.name} posts {small_amount}; {big_blind_player.name} posts {big_amount}")
+        self.ui.show_message(f"{small_blind_player.name} posts small blind: {small_amount}")
+        self.ui.show_message(f"{big_blind_player.name} posts big blind: {big_amount}")
 
     def _show_human_cards(self) -> None:
         # Shows each human players their hole cards privately before the first betting round.
@@ -106,7 +106,7 @@ class TexasHoldemGame:
         
         # Otherwise: Drawing new community cards and adding them to table.
         self.table.community_cards.extend(deck.draw(count)) 
-        self.ui.show_message(f"\n-- {street} --")   # shows what stage of the round it is.
+
         print("\n" + "-" * 30)
         print (f"{street.upper()} CARDS")
         print ("-" * 30)
@@ -120,9 +120,8 @@ class TexasHoldemGame:
             return
         
         # Show currrent betting round, community cards and pot.
-        self.ui.show_message(f"\nBetting round: {street}") 
         print("\n" + "-" * 40)
-        print(f" {street.upper()} ROUND ")
+        print(f" {street.upper()} BETTING ROUND")
         print("=" * 40)
 
         print(f"Pot: {self.table.pot}")
@@ -150,7 +149,7 @@ class TexasHoldemGame:
                 # Give human Player a private moment to see their cards and choose an action.
                 input(f"\n{player.name}, press Enter and proceed with your turn.")
             
-                self.ui.show_message(f"\nBetting round: {street}")
+                self.ui.show_message(f"\n{player.name}'s turn - {street}")
 
                 if self.table.community_cards:
                     self.ui.show_message("Community Cards:")
@@ -169,8 +168,6 @@ class TexasHoldemGame:
             else:
                 # Bots will choose an action automatically.
                 action = self._bot_action(player, call_amount)
-                self.ui.show_message(f"{player.name} chooses to {action}")
-
 
             if action == "fold":
                 # Folding removes the player from the current round. 
@@ -223,6 +220,10 @@ class TexasHoldemGame:
                 # If the player cannot call (and thus not raise), they fold.
                 if player.chips < call_amount:
                     player.folded = True
+
+                    if player.is_human:
+                        self._hide_private_info()
+
                     self.ui.show_message(f"{player.name} cannot call and folds")
                     continue
 
@@ -230,6 +231,10 @@ class TexasHoldemGame:
                 if max_raise < min_raise:
                     paid = player.bet(call_amount)
                     self.table.add_to_pot(paid)
+
+                    if player.is_human:
+                        self._hide_private_info()
+
                     if call_amount == 0:
                         self.ui.show_message(f"{player.name} checks.")
                     else:
@@ -380,10 +385,13 @@ class TexasHoldemGame:
             
             self.ui.show_message(f"{player.name}: {rank.label}")
             
-            print("\n" + "-" * 20)
-            print(f"{player.name.upper()}'s CARDS:")
-            print("-" * 20)
-            show_cards(cards)
+            print("\n" + "-" * 30)
+            print(f"{player.name.upper()}: {rank.label}")
+            print("Hole cards:")
+            show_cards(player.hole_cards)
+            print("Community cards:")
+            show_cards(self.table.community_cards)
+            print("-" * 30)
 
         # Find best hand rank
         best_rank = max(rank for player, rank in player_ranks)
@@ -433,5 +441,10 @@ class TexasHoldemGame:
         return len(active_players) == 1
 
     def _hide_private_info(self) -> None:
-        os.system("cls" if os.name == "nt" else "clear")
-        print("Previously shown cards are hidden.")        
+        if os.name == "nt":
+            os.system("cls")
+        elif os.environ.get("TERM") and os.environ.get("TERM") != "dumb":
+            os.system("clear")
+        else:
+            print("\n" * 30)
+        print("Previouly shown cards are hidden.")       

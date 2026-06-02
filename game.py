@@ -223,7 +223,7 @@ class TexasHoldemGame:
             return "raise"
         if strength >= 4 and player.chips > call_amount + self.big_blind and random.random() < 0.20:
             return "raise"
-        if player.chips > call_amount + self.big_blind and random.random() > 0.05:
+        if player.chips > call_amount + self.big_blind and random.random() < 0.05:
             return "raise"
         return "call"
     
@@ -260,7 +260,7 @@ class TexasHoldemGame:
         
         if first_card.suit == second_card.suit:
             strength += 1
-            
+
         return strength
     
     def _bot_raise_amount(self, player: Player, call_amount: int, minimum: int, maximum: int) -> int:

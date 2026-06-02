@@ -13,14 +13,14 @@ class Suit(IntEnum):
     HEARTS = 2
     SPADES = 3
 
-# Returns a single-character symbol for each suit.
+# Returns real card symbols for each suit.
     @property
     def symbol(self) -> str:
         return {
-            Suit.CLUBS: "C",
-            Suit.DIAMONDS: "D",
-            Suit.HEARTS: "H",
-            Suit.SPADES: "S"
+            Suit.CLUBS: "♣",
+            Suit.DIAMONDS: "♦",
+            Suit.HEARTS: "♥",
+            Suit.SPADES: "♠"
         }[self]
 
 # Rank represents card values from 2 to Ace.
@@ -97,10 +97,47 @@ class Deck:
         return len(self._cards)
 
     # Resets the deck to a full 52-card set and shuffles it for a new game.
-    def reset(self):
+    def reset(self) -> None:
         self._cards = [Card(rank, suit) for suit in Suit for rank in Rank]
         shuffle(self._cards)
 
+# ===========================
+# ASCII Card Visuals
+# ===========================
+
+def show_card(card: Card) -> list[str]:
+    rank = card.rank.label
+    suit = card.suit.symbol
+
+    # Fix spacing 
+    if len(rank) == 1:
+        rank_left = rank + " "
+        rank_right = " " + rank
+    else:
+        rank_left = rank
+        rank_right = rank
+
+    # Build the ASCII card
+    lines = [    
+        "┌───────┐",
+        f"│ {rank_left}    │",
+        "│       │",
+        f"│   {suit}   │",
+        "│       │",
+        f"│    {rank_right}│",
+        "└───────┘"
+    ]
+
+    return lines
+
+def show_cards(cards: list[Card]) -> None:
+    card_lines = [show_card(card) for card in cards]
+
+    for i in range(5):
+        for card in card_lines:
+            print(card[i], end="  ")
+        print()
+    
 
 # deck = Deck()
 

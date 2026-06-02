@@ -85,6 +85,14 @@ def main() -> None:
     winner = players_with_chips(players)[0]
     print(f"\n Game over! {winner.name} wins the game! Congratulations!")
 
+# ================================================
+# Monte Carlo Simulation for Poker Hand Probabilities
+# ================================================  
+print("\nRunning Monte Carlo simulation\n")
+num_trials = 10000
+results = run_simulation(num_trials)
+print_results(results, num_trials)
+
 
 if __name__ == "__main__":
     main()

@@ -1,7 +1,10 @@
 ## AI and Sources
 
-AI was used to support debugging, testing, and correcting spelling/wording mistakes.
-AI was used to help with github commands and the merging part.
+AI was used as a support tool, mainly for debugging, fixing syntax and spelling mistakes, and minor technical issues.
+AI was useful when working through more complex parts of the code, such as correctly implementing the tiebreaker logic
+in evaluator, managing parts of the game flow like round progression, and when improving the alignment of the ASCII card display.
+
+AI was helpful when dealing with challenges and resolving error messages in GitHub when pulling, merging and pushing changes.
 
 _hide_private_info() was coded using this discussion forum: 
 https://stackoverflow.com/questions/2084508/clear-the-terminal-in-python

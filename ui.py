@@ -88,5 +88,5 @@ class ConsoleUI:
                 f"{player.name}: "
                 f"Wins: {player.wins}, "
                 f"Chips: {player.chips}, "
-                f"Total earnings: {earnings}"
+                f"Total earnings: {earnings}, "
                 f"Win ratio: {win_ratio:.1f}%")

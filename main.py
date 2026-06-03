@@ -71,7 +71,7 @@ def reset_scoreboard(players: list[Player]) -> None:
     for player in players:
         player.wins = 0
         player.starting_chips = player.chips
-        player.starting_chips = player.chips
+        player.hands_played = 0
 
 def main() -> None:
     # Create the player before the first hand starts

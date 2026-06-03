@@ -25,13 +25,13 @@ def ask_numbers_players(prompt: str, minimum_players: int, maximum_players: int)
             print(f"Please enter a number between {minimum_players} and {maximum_players}. ")
             continue
 
-        return number # if numbe valid, it is returned
+        return number # if number valid, it is returned
 
 def create_players() -> list[Player]:
     # Ask how many players in total should play.
     total_players = ask_numbers_players("\nHow many players should this game consist of in total? ", MINIMUM_PLAYERS, MAXIMUM_PLAYERS)
     
-    # Aks how many of those are humans.
+    # Ask how many of those are humans.
     human_players = ask_numbers_players("How many human players are playing this game? ", 1, total_players)
 
     players = []
@@ -55,7 +55,7 @@ def create_players() -> list[Player]:
     # Create all bots.
     for i in range(number_of_bots):
         bot_name = f"Bot {i+1}"
-        # Asks how many chips this bots starts with.
+        # Asks how many chips this bot starts with.
         chips = ask_numbers_players(f"How many chips should {bot_name} start with? ", MINIMUM_CHIPS, MAXIMUM_CHIPS)
         
         players.append(Player(bot_name, chips=chips)) # Bots use is_human by default, so its not added here
@@ -63,7 +63,7 @@ def create_players() -> list[Player]:
     return players # return finished list of all players.
 
 def players_with_chips(players: list[Player]) -> list[Player]:
-    # retuns only players who still have chips. Players with 0 chips are removed from the next rounds/hand.
+    # returns only players who still have chips. Players with 0 chips are removed from the next rounds/hand.
     return [player for player in players if player.chips > 0]
 
 def reset_scoreboard(players: list[Player]) -> None:
@@ -107,7 +107,7 @@ def main() -> None:
                     print("\nGame stopped by player.")
                     return
             
-                # Move the first player to the end of the lsit
+                # Move the first player to the end of the list
                 players.append(players.pop(0)) # simplified version of dealer button rotation
 
             # Increase the hand number for the next round/hand.

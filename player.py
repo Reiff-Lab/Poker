@@ -26,7 +26,7 @@ class Player:
         self.folded = False  
 
     def receive(self, cards: list[Card]) -> None: #add the received cards to the player's hole cards
-        self.hole_cards.extend(cards) # hole_cards is a list of cards and with extend(cards) new cards are added one by one into the whole_cards list
+        self.hole_cards.extend(cards) # hole_cards is a list of cards and with extend(cards) new cards are added one by one into the hole_cards list
 
     def bet(self, amount: int) -> int: # check if the player has enough chips to bet the specified amount
         if amount < 0: #checking for negative amount and raise Error

@@ -53,7 +53,7 @@ class ConsoleUI:
             print("Invalid action. Please try again.") # If the input was not valid, the loop will continue and the Player will be asked again. 
 
     def ask_raise_amount(self, minimum: int, maximum: int) -> int:
-        # Ask the Player how many chips they want to raise and returns the number/amount.
+        # Ask the Player how many chips they want to raise and return the number/amount.
         while True:
             try:
                 amount = int(input(f"Enter raise amount between {minimum} and {maximum}: "))

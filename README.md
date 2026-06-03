@@ -6,7 +6,7 @@ AI was used to help with github commands and the merging part.
 _hide_private_info() was coded using this discussion forum: 
 https://stackoverflow.com/questions/2084508/clear-the-terminal-in-python
 
-playing card desing was inspired by this:
+playing card design was inspired by this:
 https://stackoverflow.com/questions/53578015/need-ascii-playing-cards-to-print-on-one-line
 
 ## Team Members

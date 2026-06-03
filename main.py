@@ -94,11 +94,14 @@ def main() -> None:
 # ================================================
 # Monte Carlo Simulation for Poker Hand Probabilities
 # ================================================  
-print("\nRunning Monte Carlo simulation\n")
-num_trials = 10000
-results = run_simulation(num_trials)
-print_results(results, num_trials)
+def run_monte_carlo():
+    print("\nRunning Monte Carlo simulation\n")
+    num_trials = 10000
+    results = run_simulation(num_trials)
+    print_results(results, num_trials)
+
 
 
 if __name__ == "__main__":
+    run_monte_carlo()
     main()

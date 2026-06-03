@@ -61,21 +61,13 @@ class HandEvaluator:
         suits = [card.suit for card in cards]
         is_flush = len(set(suits)) == 1
 
-        if len(unique_ranks) == 5:
-            if unique_ranks[0] - unique_ranks[-1] == 4:
-                is_straight = True
-                straight_high = unique_ranks[0]
-            elif unique_ranks == [Rank.ACE, Rank.FIVE, Rank.FOUR, Rank.THREE, Rank.TWO]:
-                is_straight = True
-                straight_high = Rank.FIVE
-
         # check for straight and get the high card of the straight if it exists
         straight_high = self._straight_high(ranks)
         
         # --- Hand ranking logic based on poker rules ---
 
         # Straight Flush: A straight and a flush at the same time.
-        if is_flush and straight_high:
+        if is_flush and straight_high is not None:
             return HandRank(HandCategory.STRAIGHT_FLUSH, (straight_high,))
         
         # Four of a Kind: Four cards of the same rank.
@@ -91,7 +83,7 @@ class HandEvaluator:
             return HandRank(HandCategory.FLUSH, tuple(ranks))
 
         # Straight: Five cards in sequence, ranked by the high card of the straight.
-        if straight_high:
+        if straight_high is not None:
             return HandRank(HandCategory.STRAIGHT, (straight_high,))
 
         # Three of a Kind: Three cards of the same rank, ranked by the rank of the three and then the kickers.
@@ -110,7 +102,7 @@ class HandEvaluator:
         return HandRank(HandCategory.HIGH_CARD, tuple(ranks))
 
 
-    def _straight_high(self, ranks: list[int]) -> int | None:
+    def _straight_high(self, ranks: list[Rank]) -> Rank | None:
             # Remove duplicates and sort ranks in descending order.
             unique = sorted(set(ranks), reverse=True)
 

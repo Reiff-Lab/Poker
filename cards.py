@@ -65,7 +65,7 @@ class Card:
     rank: Rank
     suit: Suit
     
-    # Returns a string representation of the card, combining rank and suit symbols (e.g., "AH" for Ace of Hearts).
+    # Returns a string representation of the card, combining rank and suit symbols (e.g., "A♥" for Ace of Hearts).
     def __str__(self) -> str:
         return f"{self.rank.label}{self.suit.symbol}"
     

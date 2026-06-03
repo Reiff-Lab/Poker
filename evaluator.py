@@ -25,6 +25,8 @@ class HandCategory(IntEnum):
 # Stores the result of a hand evaluation, including the category and tiebreaker information for comparing hands of the same category.
 @dataclass(frozen=True, order=True)
 class HandRank:
+    # # Tiebreakers are used to compare hands of the same category.
+    # Higher values in earlier positions decide the winner.
     category: HandCategory
     tiebreakers: tuple[Rank, ...] = ()
 
@@ -57,10 +59,11 @@ class HandEvaluator:
         groups = sorted(((count, rank) for rank, count in counts.items()), reverse=True)
 
         # Check if all suits are the same for a flush.
+        # A flush occurs when all five cards share the same suit
         suits = [card.suit for card in cards]
         is_flush = len(set(suits)) == 1
 
-        # check for straight and get the high card of the straight if it exists
+        # check for straight and get the highest card of the straight if it exists
         straight_high = self._straight_high(ranks)
         
         # --- Hand ranking logic based on poker rules ---

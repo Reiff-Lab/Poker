@@ -26,7 +26,7 @@ class HandCategory(IntEnum):
 @dataclass(frozen=True, order=True)
 class HandRank:
     category: HandCategory
-    tiebreakers: tuple[int, ...] = ()
+    tiebreakers: tuple[Rank, ...] = ()
 
     # Convert enum name to a readable text (e.g., "Straight Flush" instead of "STRAIGHT_FLUSH").
     @property
@@ -49,7 +49,6 @@ class HandEvaluator:
     def _rank_five(self, cards: list[Card]) -> HandRank:
         # Extract ranks and sort them in descending order.
         ranks = sorted((card.rank for card in cards), reverse=True)
-        unique_ranks = sorted(set(ranks), reverse=True)
 
         # Count the occurrences of each rank (e.g., pairs, three of a kind)
         counts = Counter(ranks)

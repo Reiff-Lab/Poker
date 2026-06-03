@@ -14,6 +14,7 @@ class Player:
     folded: bool = False
     starting_chips: int = 0
     wins: int = 0
+    hands_played: int = 0
 
     def __post_init__(self) -> None:
         # Runs after Player object is created to save original chip amount for scoreboard.

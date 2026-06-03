@@ -32,8 +32,9 @@ class TexasHoldemGame:
 
         for player in self.players: 
             player.reset_for_hand() # reset Players
+            player.hands_played += 1
             player.receive(deck.draw(2)) # Deal 2 hole cards to each Player privatly
-        
+
         # The first 2 Players post the small/big blind.
         self._post_blinds() 
         
@@ -273,7 +274,7 @@ class TexasHoldemGame:
 
 
     def _bot_action(self, player: Player, call_amount: int) -> str:
-        # Simple bot decision-making based on hand strength, chip cost and randomness. Not on Probability or the other Players Action.
+        # The bot makes a simple decision using hand strength, chip cost, and some randomness.
         strength = self._bot_hand_strength(player)
 
         # If the bot has no chips left, it cannot act anymore (it returns call and only if necessary the game will force a fold)

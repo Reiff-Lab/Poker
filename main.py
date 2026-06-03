@@ -43,7 +43,7 @@ def create_players() -> list[Player]:
         if name == "": # Default name, if the player does not enter a name
             name = f"Player {i + 1}"
 
-        # Aks how many chips human player starts with
+        # Ask how many chips human player starts with
         chips = ask_numbers_players(f"How many chips should {name} start with? ", MINIMUM_CHIPS, MAXIMUM_CHIPS)
 
         # Create the player object and mark it as human Player
@@ -70,6 +70,7 @@ def reset_scoreboard(players: list[Player]) -> None:
     # Reset scoreboard values.
     for player in players:
         player.wins = 0
+        player.starting_chips = player.chips
         player.starting_chips = player.chips
 
 def main() -> None:

@@ -27,3 +27,19 @@ Feel free to fork the repository and submit pull requests for improvements or bu
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## AI and Sources
+
+AI was used to support debugging, testing, and correcting spelling/wording mistakes.
+AI was used to help with github commands and the merging part.
+
+_hide_private_info() was coded using this discussion forum: 
+https://stackoverflow.com/questions/2084508/clear-the-terminal-in-python
+
+playing card desing was inspired by this:
+https://stackoverflow.com/questions/53578015/need-ascii-playing-cards-to-print-on-one-line
+
+## Team Members
+
+Luisa Reiff
+Rawya Abu Rizik

@@ -78,8 +78,15 @@ class ConsoleUI:
         print("\n--- Scoreboard ---")
         for player in players:
             earnings = player.chips - player.starting_chips
+           
+            if player.hands_played > 0:
+                win_ratio = (player.wins / player.hands_played) * 100 # in %
+            else:
+                win_ratio = 0 # divide by 0 Error
+           
             print(
                 f"{player.name}: "
                 f"Wins: {player.wins}, "
                 f"Chips: {player.chips}, "
-                f"Total earnings: {earnings}")
+                f"Total earnings: {earnings}"
+                f"Win ratio: {win_ratio:.1f}%")

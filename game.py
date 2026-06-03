@@ -33,12 +33,12 @@ class TexasHoldemGame:
         for player in self.players: 
             player.reset_for_hand() # reset Players
             player.hands_played += 1
-            player.receive(deck.draw(2)) # Deal 2 hole cards to each Player privatly
+            player.receive(deck.draw(2)) # Deal 2 hole cards to each Player privately
 
         # The first 2 Players post the small/big blind.
         self._post_blinds() 
         
-        # The Human Players privately look at their cards befre betting starts.
+        # The Human Players privately look at their cards before betting starts.
         self._show_human_cards()
         
         # Betting before the Flop
@@ -62,7 +62,7 @@ class TexasHoldemGame:
         # Final betting round.
         self._betting_round("River")
 
-        # Compare all reamining hands and give pot to the winner(s).
+        # Compare all remaining hands and give pot to the winner(s).
         self._showdown()
 
         # Show Scoreboard
@@ -86,7 +86,7 @@ class TexasHoldemGame:
         self.ui.show_message(f"{big_blind_player.name} posts big blind: {big_amount}")
 
     def _show_human_cards(self) -> None:
-        # Shows each human players their hole cards privately before the first betting round.
+        # Shows each human player thir hole cards privately before the first betting round.
         for player in self.players:
             if player.is_human:
                 input(f"\n{player.name}, press Enter to see your cards.")
@@ -120,7 +120,7 @@ class TexasHoldemGame:
         if self._only_one_player_left():    
             return
         
-        # Show currrent betting round, community cards and pot.
+        # Show current betting round, community cards and pot.
         print("\n" + "-" * 40)
         print(f" {street.upper()} BETTING ROUND")
         print("=" * 40)
@@ -261,13 +261,13 @@ class TexasHoldemGame:
 
                     self.ui.show_message(f"{player.name} raises by {raise_amount}.")
                     
-                    # Adter a raise all other players must respond to the new highest bet. Thus, we update players_to_act
+                    # After a raise all other players must respond to the new highest bet. Thus, we update players_to_act
                     players_to_act = [
                         other_player
                         for other_player in self.players
                         if other_player.can_act and other_player != player ]
 
-        # At end of the bettiing round the current_bet is reset.
+        # At end of the betting round the current_bet is reset.
         # The pot stays
         for player in self.players:
             player.current_bet = 0
@@ -293,16 +293,16 @@ class TexasHoldemGame:
         if call_amount == 0:
             if strength >= 5 and (player.chips > self.big_blind) and random.random() < 0.50: # strong hands raise quite often.
                 return "raise"
-            if strength >= 3 and (player.chips > self.big_blind) and random.random() < 0.15: # medum hands sometimes raise.
+            if strength >= 3 and (player.chips > self.big_blind) and random.random() < 0.15: # medium hands sometimes raise.
                 return "raise"
-            if player.chips > self.big_blind and random.random() < 0.05: # weak hands rarly - bots can bluff.
+            if player.chips > self.big_blind and random.random() < 0.05: # weak hands rarely - bots can bluff.
                 return "raise"
             return "call" # bot checks (represented as call with call_amount 0).
         
         # If calling costs more than almost half of the bots chips and the hand is weak it will fold
         if call_ratio > 0.45 and strength < 6: 
             return "fold"
-        # if calling costs more than a quarter of the bots chips and the hand is weak is will usually fold (randomness)
+        # if calling costs more than a quarter of the bots chips and the hand is weak, it will usually fold (randomness)
         if call_ratio > 0.25 and strength < 4 and random.random() < 0.75:
             return "fold"
         
@@ -347,7 +347,7 @@ class TexasHoldemGame:
 
         if ranks[0] >= 14: # highest card Ace
             strength += 2
-        elif ranks[0] >= 11: # highest card Jack, Queem, King
+        elif ranks[0] >= 11: # high cards Jack, Queen, King
             strength += 1
 
         if ranks[1] > 10: # if the second card is also high
@@ -366,7 +366,7 @@ class TexasHoldemGame:
     
 
     def _showdown(self) -> None:
-        # Only players who have not folded can wind the hand.
+        # Only players who have not folded can win the hand.
         active_players = [player for player in self.players if not player.folded]
         
         if len(active_players) == 1:
@@ -437,7 +437,7 @@ class TexasHoldemGame:
         self.table.pot = 0
 
     def _only_one_player_left(self) -> bool:
-        # active means not folded, so all-in Players with 0 chips are still active and can wini at showdown
+        # active means not folded, so all-in Players with 0 chips are still active and can win at showdown
         active_players = [player for player in self.players if player.active]
         return len(active_players) == 1
 
@@ -448,4 +448,4 @@ class TexasHoldemGame:
             os.system("clear")
         else:
             print("\n" * 30)
-        print("Previouly shown cards are hidden.")       
+        print("Previously shown cards are hidden.")       
